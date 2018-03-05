@@ -16,8 +16,12 @@
 /tmp/*
 !/log/.keep
 !/tmp/.keep
+*.swp
 
 /node_modules
 /yarn-error.log
 
 .byebug_history
+
+# Priviledged files
+config/secrets.yml
