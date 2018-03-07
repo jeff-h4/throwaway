@@ -30,9 +30,9 @@
 # For available Capistrano configuration variables see the documentation page.
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
-Rails.application.configure do
-  config.secret_key_base = ENV["SECRET_KEY_BASE"]
-end
+#Rails.application.configure do
+#  config.secret_key_base = ENV["SECRET_KEY_BASE"]
+#end
 
 
 # Custom SSH Options
