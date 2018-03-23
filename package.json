@@ -21,6 +21,7 @@
   "license": "MIT",
   "devDependencies": {
     "jest": "^22.4.3",
+    "ts-jest": "^22.4.2",
     "tslint": "^5.9.1",
     "webpack-dev-server": "2.11.2"
   },
@@ -35,6 +36,15 @@
     "moduleDirectories": [
       "node_modules",
       "app/javascript"
-    ]
+    ],
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js"
+    ],
+    "transform": {
+      "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
+    },
+    "testRegex": "app/javascript/.*\\.spec.(ts|tsx|js)$"
   }
 }
