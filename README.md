@@ -2,6 +2,9 @@
 
 Project Stack: Angular2 w/ Typescript, Rails 5.1, mySQL, Jest
 
+# Production Environment Variables
+When setting environment variables on production, the way to do it is to add an entry in ```/etc/environment```.
+
 # Database: MySQL
 ## Setup
 We need to install mySQL.
@@ -46,6 +49,15 @@ In config/database.yml, ensure the
 - user's password
 are set correctly.
 I have set the password to the ENV THROWAWAY_USER_MYSQL_PASSWORD. This was exported from my .zshrc.
+
+## Extra steps for Production
+For the production webserver, ensure that you set the DB password as an environment variable set within ```/etc/environment```
+Also, if the production database does not exist, execute
+```RAILS_ENV bundle exec rake db:create```.
+Note that, if you're switching databases, the ```current``` version of config/database.yml may not update until you
+have a successful production deploy (which needs to have the production DB existing in the first place).
+In this case, go find the up-to-date database.yml in one of the release directories, and execute rake from there.
+Or you can try manually creating the database from the mySQL console.
 
 # Test runner: Jest
 ## Reference
