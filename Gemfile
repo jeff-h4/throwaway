@@ -29,9 +29,9 @@ gem 'jbuilder', '~> 2.5'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password
-gem 'bcrypt', '~> 3.1.7'
 gem 'jwt', '~> 2.1.0'
-gem 'pattern'
+gem 'bcrypt', '~> 3.1.7'
+gem 'rails-patterns'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
@@ -46,6 +46,7 @@ end
 group :development, :test do
   gem 'pry', '>= 0.11.1'
   gem 'pry-rails'
+  gem 'pry-byebug'
   # Adds support for Capybara system testing and selenium driver
   gem 'capybara', '~> 2.13'
   gem 'rspec-rails', '~> 3.7'
