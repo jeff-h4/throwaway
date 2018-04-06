@@ -24,7 +24,6 @@ class AuthorizeApiRequest < Patterns::Service
   end
 
   def decoded_auth_token
-    binding.pry
     @decoded_auth_token ||= JsonWebToken.decode(http_auth_header)
   end
 
