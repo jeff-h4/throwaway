@@ -1,18 +1,20 @@
 import { Component } from '@angular/core';
-import templateString from './login-form.component.html'
+import templateString from './login-form.component.html';
+
 import { User } from '../_models/user';
-import { LoginFormService } from "./login-form.service"
+import { LoginFormService } from "./login-form.service";
+import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: 'app-login-form',
   template: templateString,
-  providers: [LoginFormService]
+  providers: [LoginFormService, AuthService]
 })
 export class LoginFormComponent {
-  model = new User(10, 'Fred', 'Flintstone');
+  model = new User(10, 'johndoe@mail.com', 'johndoe');
   submitted = false;
 
-  constructor(private loginFormService: LoginFormService) {}
+  constructor(private loginFormService: LoginFormService, private authService: AuthService) {}
 
   // TODO: From tutorial: Remove this when we're done
   get diagnostic() {
@@ -27,9 +29,12 @@ export class LoginFormComponent {
 
   login(): void {
     this.loginFormService.loginUser(this.model)
-      .subscribe(user =>
-        console.log("Component login callback"));
+      .subscribe(resp => {
+        console.log("Component login callback");
+        this.authService.setAuthorizationToken(resp.auth_token);
+      });
   }
+
   resetForm() {
     this.model = new User(1, '', '');
   }
