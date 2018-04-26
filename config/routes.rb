@@ -3,5 +3,5 @@ Rails.application.routes.draw do
   get 'home/index'
   post 'authenticate', to: "authentication#authenticate"
   get 'requests/index'
-  get 'users/create'
+  resources :users, only: [:create]
 end

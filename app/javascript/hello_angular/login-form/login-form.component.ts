@@ -11,7 +11,7 @@ import { AuthService } from "../_services/auth.service";
   providers: [LoginFormService, AuthService]
 })
 export class LoginFormComponent {
-  model = new User(10, 'johndoe@mail.com', 'johndoe');
+  model = new User(-1, '', '',  'johndoe@mail.com', 'johndoe');
   submitted = false;
 
   constructor(private loginFormService: LoginFormService, private authService: AuthService) {}
@@ -36,6 +36,6 @@ export class LoginFormComponent {
   }
 
   resetForm() {
-    this.model = new User(1, '', '');
+    this.model = new User(-11, '','', '', '');
   }
 }
