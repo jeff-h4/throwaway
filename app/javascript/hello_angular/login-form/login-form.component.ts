@@ -13,25 +13,25 @@ import { AuthService } from "../_services/auth.service";
 export class LoginFormComponent {
   model = new User(-1, '', '',  'johndoe@mail.com', 'johndoe');
   submitted = false;
+  loginFail = false;
 
   constructor(private loginFormService: LoginFormService, private authService: AuthService) {}
 
-  // TODO: From tutorial: Remove this when we're done
-  get diagnostic() {
-    return JSON.stringify(this.model);
-  }
-
   onSubmit() {
-    console.log("Form submitted");
     this.submitted = true;
     this.login();
   }
 
   login(): void {
     this.loginFormService.loginUser(this.model)
-      .subscribe(resp => {
-        console.log("Component login callback");
-        this.authService.setAuthorizationToken(resp.auth_token);
+      .subscribe({
+        next: resp => {
+          this.authService.setAuthorizationToken(resp.auth_token);
+          this.loginFail = false;
+        },
+        error: err => {
+          this.loginFail = true;
+        }
       });
   }
 

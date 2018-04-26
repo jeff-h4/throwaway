@@ -51,6 +51,8 @@
 
     <button type="submit" class="btn btn-success">Sign Up</button>
     <button (click)="resetForm(); signupForm.reset()">Reset Form</button>
-
+    <div *ngIf="signupFail">
+      <p>There was a problem signing up for an account.</p>
+    </div>
   </form>
 </div>

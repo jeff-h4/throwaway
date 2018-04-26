@@ -27,6 +27,8 @@
 
     <button type="submit" class="btn btn-success">Submit</button>
     <button (click)="resetForm(); loginForm.reset()">Reset Form</button>
-
+    <div *ngIf="loginFail">
+      <p>There was a problem logging in</p>
+    </div>
   </form>
 </div>

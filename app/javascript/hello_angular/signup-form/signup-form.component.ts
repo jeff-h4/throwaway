@@ -12,6 +12,7 @@ import { AuthService } from "../_services/auth.service";
 })
 export class SignupFormComponent {
   model = new User(-1, 'Jane', 'Doe', 'janedoe@mail.com', 'janedoe');
+  signupFail = false;
   submitted = false;
 
   constructor(private signupFormService: SignupFormService, private authService: AuthService) {}
@@ -24,9 +25,14 @@ export class SignupFormComponent {
 
   signup(): void {
     this.signupFormService.signupUser(this.model)
-      .subscribe(resp => {
-        console.log("Component login callback");
-        this.authService.setAuthorizationToken(resp.auth_token);
+      .subscribe({
+        next: resp => {
+          this.authService.setAuthorizationToken(resp.auth_token);
+          this.signupFail = false;
+        },
+        error: err => {
+          this.signupFail = true;
+        }
       });
   }
 
