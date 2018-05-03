@@ -23,7 +23,7 @@ export class LoginFormComponent {
   }
 
   login(): void {
-    this.loginFormService.loginUser(this.model)
+    this.loginFormService.loginUser(this.model.email, this.model.password)
       .subscribe({
         next: resp => {
           this.authService.setAuthorizationToken(resp.auth_token);

@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 
-import { User } from '../_models/user';
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -20,9 +18,11 @@ export class LoginFormService {
 
   constructor(private http: HttpClient) {}
 
-  loginUser (user: User): Observable<any> {
-    console.log("loginUser()");
-    return this.http.post<User>(this.targetUrl, user, httpOptions)
+  loginUser (email: string, password: string): Observable<any> {
+    const body = {
+      email: email,
+      password: password
+    }
+    return this.http.post(this.targetUrl, body, httpOptions)
   }
-
 }
