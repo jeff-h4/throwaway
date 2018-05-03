@@ -14,15 +14,15 @@ const httpOptions = {
 
 @Injectable()
 export class LoginFormService {
-  targetUrl = 'authenticate';  // URL to web api
 
   constructor(private http: HttpClient) {}
 
   loginUser (email: string, password: string): Observable<any> {
+    const targetUrl = 'authenticate';
     const body = {
       email: email,
       password: password
     }
-    return this.http.post(this.targetUrl, body, httpOptions)
+    return this.http.post(targetUrl, body, httpOptions);
   }
 }
