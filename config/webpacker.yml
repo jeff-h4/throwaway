@@ -30,6 +30,12 @@ default: &default
     - .jpg
     - .html
 
+  exclude: [
+    'tsconfig.jest.json',
+    'setupJest.ts',
+    'jestGlobalMocks.ts'
+  ]
+
 development:
   <<: *default
   compile: true
