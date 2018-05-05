@@ -16,12 +16,11 @@ const httpOptions = {
 
 @Injectable()
 export class SignupFormService {
-  targetUrl = 'users';  // URL to web api
 
   constructor(private http: HttpClient) {}
 
   signupUser (user: User): Observable<any> {
-    console.log("signupUser()");
-    return this.http.post<User>(this.targetUrl, user, httpOptions)
+    const targetUrl = 'users';
+    return this.http.post<User>(targetUrl, user, httpOptions)
   }
 }

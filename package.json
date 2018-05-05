@@ -9,8 +9,10 @@
     "@angular/platform-browser": "^5.2.9",
     "@angular/platform-browser-dynamic": "^5.2.9",
     "@rails/webpacker": "^3.3.1",
+    "@types/jest": "^22.2.3",
     "core-js": "^2.5.3",
     "html-loader": "^0.5.5",
+    "jest-preset-angular": "^5.2.2",
     "rxjs": "^5.5.7",
     "ts-loader": "3.5.0",
     "typescript": "^2.7.2",
@@ -32,6 +34,13 @@
     "test": "jest"
   },
   "jest": {
+    "globals": {
+      "ts-jest": {
+        "tsConfigFile": "tsconfig.jest.json"
+      }
+    },
+    "preset": "jest-preset-angular",
+    "setupTestFrameworkScriptFile": "<rootDir>/setupJest.ts",
     "roots": [
       "app/javascript"
     ],
@@ -46,7 +55,6 @@
     ],
     "transform": {
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    },
-    "testRegex": "app/javascript/.*\\.spec.(ts|tsx|js)$"
+    }
   }
 }

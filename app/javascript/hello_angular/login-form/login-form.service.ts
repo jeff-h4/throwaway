@@ -6,8 +6,6 @@ import { Observable } from 'rxjs/Observable';
 import { of } from 'rxjs/observable/of';
 import { catchError } from 'rxjs/operators';
 
-import { User } from '../_models/user';
-
 const httpOptions = {
   headers: new HttpHeaders({
     'Content-Type':  'application/json',
@@ -16,13 +14,15 @@ const httpOptions = {
 
 @Injectable()
 export class LoginFormService {
-  targetUrl = 'authenticate';  // URL to web api
 
   constructor(private http: HttpClient) {}
 
-  loginUser (user: User): Observable<any> {
-    console.log("loginUser()");
-    return this.http.post<User>(this.targetUrl, user, httpOptions)
+  loginUser (email: string, password: string): Observable<any> {
+    const targetUrl = 'authenticate';
+    const body = {
+      email: email,
+      password: password
+    }
+    return this.http.post(targetUrl, body, httpOptions);
   }
-
 }
