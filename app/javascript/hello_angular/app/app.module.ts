@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { HomeComponent } from '../home/home.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { SignupFormComponent } from '../signup-form/signup-form.component';
@@ -18,6 +19,7 @@ import { AuthService } from '../_services/auth.service';
   declarations: [
     AppComponent,
     DashboardComponent,
+    HomeComponent,
     LoginFormComponent,
     PageNotFoundComponent,
     SignupFormComponent

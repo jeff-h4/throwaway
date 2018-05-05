@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router }  from '@angular/router';
 import templateString from './login-form.component.html';
 
 import { User } from '../_models/user';
@@ -15,7 +16,11 @@ export class LoginFormComponent {
   submitted = false;
   loginFail = false;
 
-  constructor(private loginFormService: LoginFormService, private authService: AuthService) {}
+  constructor(
+    private router: Router,
+    private loginFormService: LoginFormService,
+    private authService: AuthService
+  ) {}
 
   onSubmit() {
     this.submitted = true;
@@ -28,6 +33,7 @@ export class LoginFormComponent {
         next: resp => {
           this.authService.setAuthorizationToken(resp.auth_token);
           this.loginFail = false;
+          this.router.navigate(['/dashboard']);
         },
         error: err => {
           this.loginFail = true;
