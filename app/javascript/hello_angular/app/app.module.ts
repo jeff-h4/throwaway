@@ -4,21 +4,29 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 
 import { AppComponent } from './app.component';
+import { AppRoutingModule } from './app-routing.module';
+
+import { DashboardComponent } from '../dashboard/dashboard.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
+import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
 import { SignupFormComponent } from '../signup-form/signup-form.component';
 
 import { httpInterceptorProviders } from '../http-interceptors/index';
 import { AuthService } from '../_services/auth.service';
+
 @NgModule({
   declarations: [
     AppComponent,
+    DashboardComponent,
     LoginFormComponent,
+    PageNotFoundComponent,
     SignupFormComponent
   ],
   imports: [
     BrowserModule,
     FormsModule,
-    HttpClientModule
+    HttpClientModule,
+    AppRoutingModule
   ],
   providers: [
     httpInterceptorProviders,
