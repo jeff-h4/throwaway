@@ -1,5 +1,6 @@
 class RequestsController < ApplicationController
   def index
-    render json: {requests: "They should be here"}
+    requests = Request.all
+    render json: {requests: requests}
   end
 end
