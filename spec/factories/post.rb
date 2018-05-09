@@ -1,6 +1,6 @@
 FactoryBot.define do
   now = Time.now
-  factory :request do
+  factory :post do
     title "1 Butterknife"
     created_at now
     updated_at now

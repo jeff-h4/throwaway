@@ -55,4 +55,11 @@ RSpec.configure do |config|
   config.filter_rails_from_backtrace!
   # arbitrary gems may also be filtered via:
   # config.filter_gems_from_backtrace("gem name")
+
+  # Rspec metadata-based example enhancements
+  config.before(:each, :logged_in) do
+    user = double(user)
+    allow_any_instance_of(UserAuthenticationService).to receive(:authenticate_request).and_return(true)
+    allow_any_instance_of(UserAuthenticationService).to receive(:current_user).and_return(user)
+  end 
 end
