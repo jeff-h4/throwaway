@@ -14,8 +14,10 @@ import { SignupFormComponent } from '../signup-form/signup-form.component';
 
 import { httpInterceptorProviders } from '../http-interceptors/index';
 import { AuthService } from '../_services/auth.service';
+import { PostService } from '../_services/post.service';
 
 @NgModule({
+  //Only declare declarables: Components, Pipes and Directives
   declarations: [
     AppComponent,
     DashboardComponent,
@@ -24,16 +26,20 @@ import { AuthService } from '../_services/auth.service';
     PageNotFoundComponent,
     SignupFormComponent
   ],
+  //Import modules that this module relies upon
   imports: [
     BrowserModule,
     FormsModule,
     HttpClientModule,
     AppRoutingModule
   ],
+  //Services that this module needs
   providers: [
     httpInterceptorProviders,
-    AuthService
+    AuthService,
+    PostService
   ],
+  //Insert any component listed into the DOM
   bootstrap: [AppComponent]
 })
 export class AppModule { }

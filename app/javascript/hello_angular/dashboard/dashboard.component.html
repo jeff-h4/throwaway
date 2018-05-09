@@ -1,4 +1,15 @@
 <div class="dashboard">
   <h1>Dashboard Page</h1>
-  <p>Looks like nobody needs anything yet.</p>
+
+  <div *ngIf="isLoading">
+    <p>Looks like nobody needs anything yet.</p>
+  </div>
+
+  <div *ngIf="!isLoading">
+    <ul>
+      <li *ngFor="let post of posts">
+        {{ post.title }}
+      </li>
+    </ul>
+  </div>
 </div>
