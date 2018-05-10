@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import templateString from './dashboard.component.html';
 
-import { Post, PostArray } from '../_interfaces/post.interface';
+import { Post } from '../_models/post';
 import { PostService } from '../_services/post.service';
 
 @Component({
@@ -11,31 +11,28 @@ import { PostService } from '../_services/post.service';
 export class DashboardComponent implements OnInit {
 
   isLoading: boolean;
+  error: boolean;
   posts: Post[];
 
   constructor(
     private postService: PostService
   ) {
     this.isLoading = true;
+    this.error = false;
     this.posts = [];
   }
 
   ngOnInit() {
-    console.log("ngOnInit()!");
-    debugger;
-    this.postService.getPosts()
-      .subscribe({
-        next: resp => {
-          console.log("We got posts!");
-          this.isLoading = false;
-          for (let entry of resp.data) {
-            this.posts.push({id: entry.id, title: entry.attributes.title});
-          }
-        },
-        error: err => {
-          console.log("There was a problem fetching Posts!");
-          this.isLoading = false;
-        }
-      })
+    this.postService.getPosts().subscribe({
+      next: posts => {
+        this.posts = posts;
+        this.isLoading = false;
+      },
+      error: err => {
+        console.log("Problem getting Posts");
+        this.isLoading = false;
+        this.error = true;
+      }
+    });
   }
 }

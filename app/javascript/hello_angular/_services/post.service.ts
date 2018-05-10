@@ -1,21 +1,22 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs/Observable';
 
-import { Post, PostArray } from '../_interfaces/post.interface';
+import { JsonApiQueryData } from 'angular2-jsonapi';
 
-const httpOptions = {
-  headers: new HttpHeaders({
-    'Content-Type':  'application/json'
-  })
-}
+import { Datastore } from '../_services/datastore.service';
+import { Post } from '../_models/post';
 
 @Injectable()
 export class PostService {
-  constructor(private http: HttpClient) {}
+  constructor(
+    private datastore: Datastore
+  ) {}
 
-  getPosts() : Observable<any> {
-    const targetUrl = 'posts';
-    return this.http.get(targetUrl, httpOptions);
+  getPosts() : Observable<Post[]> {
+    return this.datastore.findAll(Post, {})
+      .pipe(
+        map(queryData => queryData.getModels())
+      );
   }
 }

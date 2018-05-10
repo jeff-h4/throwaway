@@ -5,11 +5,14 @@
     <p>Looks like nobody needs anything yet.</p>
   </div>
 
-  <div *ngIf="!isLoading">
+  <div *ngIf="!isLoading && !error">
     <ul>
       <li *ngFor="let post of posts">
         {{ post.title }}
       </li>
     </ul>
+  </div>
+  <div *ngIf="error">
+    <p>ERROR: There was a problem retrieving the posts.</p>
   </div>
 </div>
