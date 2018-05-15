@@ -10,12 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180508163244) do
+ActiveRecord::Schema.define(version: 20180514213545) do
 
   create_table "posts", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string "title", limit: 50
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "actor_id"
+    t.bigint "owner_id"
   end
 
   create_table "users", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
