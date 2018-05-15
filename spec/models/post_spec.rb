@@ -10,4 +10,9 @@ RSpec.describe Post, type: :model do
     post = build(:post, title: nil)
     expect(post).to_not be_valid
   end
+
+  it "is invalid without an owner" do
+    post = build(:post, title: "I don't have an owner", owner: nil)
+    expect(post).to_not be_valid
+  end
 end
