@@ -63,3 +63,22 @@ RSpec.configure do |config|
     allow_any_instance_of(UserAuthenticationService).to receive(:current_user).and_return(user)
   end 
 end
+
+RSpec.shared_examples "controller rejects unauthenticated requests" do
+  context "action" do
+    it "returns http status unauthorized" do
+      subject
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+end
+
+RSpec.shared_examples "controller responds with correct status code" do |code|
+  context "action" do
+    it "returns the correct status code" do
+      subject
+      expect(response).to have_http_status(code)
+    end
+  end
+end
+
