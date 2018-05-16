@@ -2,18 +2,14 @@ require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
   describe "GET #index" do
-    describe "when user is authorized", :logged_in do
-      it "returns http success" do
-        get :index
-        expect(response).to have_http_status(:success)
-      end
+    subject { get :index }
+
+    describe "when request is unauthenticated" do
+      include_examples "controller rejects unauthenticated requests"
     end
 
-    describe "when user is unauthorized" do
-      it "returns http unauthorized" do
-        get :index
-        expect(response).to have_http_status(:unauthorized)
-      end
+    describe "when request is authenticated", :logged_in do
+      include_examples "controller responds with correct status code", 200
     end
   end
 end
