@@ -33,7 +33,8 @@
   },
   "scripts": {
     "lint": "tslint -c config/tslint.json 'app/javascript/**/*.{ts,tsx}'",
-    "test": "jest"
+    "test": "jest",
+    "jest-debug": "jest --debug"
   },
   "jest": {
     "globals": {
@@ -56,7 +57,11 @@
       "js"
     ],
     "transform": {
+      "\\.js$": "<rootDir>/node_modules/babel-jest",
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(lodash-es|my-project)/)"
+    ]
   }
 }
