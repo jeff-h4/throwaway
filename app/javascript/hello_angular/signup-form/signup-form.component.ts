@@ -2,20 +2,38 @@ import { Component } from '@angular/core';
 import templateString from './signup-form.component.html';
 
 import { User } from '../_models/user';
+import { Datastore } from '../_services/datastore.service'
 import { SignupFormService } from "./signup-form.service";
 import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: 'app-signup-form',
   template: templateString,
-  providers: [SignupFormService, AuthService]
+  providers: [
+    AuthService,
+    Datastore,
+    SignupFormService
+  ]
 })
 export class SignupFormComponent {
-  model = new User(-1, 'Jane', 'Doe', 'janedoe@mail.com', 'janedoe');
-  signupFail = false;
-  submitted = false;
+  model : User;
+  signupFail : boolean;
+  submitted : boolean;
 
-  constructor(private signupFormService: SignupFormService, private authService: AuthService) {}
+  constructor(
+    private authService: AuthService,
+    private datastore: Datastore,
+    private signupFormService: SignupFormService
+  ) {
+    this.model = datastore.createRecord(User, {
+      first_name: "Jane",
+      last_name: "Doe",
+      email: "janedoe@mail.com",
+      password: "janedoe"
+    });
+    this.signupFail = false;
+    this.submitted = false;
+  }
 
   onSubmit() {
     console.log("Form submitted");
@@ -37,6 +55,11 @@ export class SignupFormComponent {
   }
 
   resetForm() {
-    this.model = new User(-1, '', '', '', '');
+    this.model = this.datastore.createRecord(User, {
+      first_name: "",
+      last_name: "",
+      email: "",
+      password: ""
+    })
   }
 }

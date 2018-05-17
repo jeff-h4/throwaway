@@ -9,6 +9,7 @@ import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
 import { DashboardComponent } from '../dashboard/dashboard.component';
+import { FindFriendFormComponent } from '../find-friend-form/find-friend-form.component';
 import { HomeComponent } from '../home/home.component';
 import { LoginFormComponent } from '../login-form/login-form.component';
 import { PageNotFoundComponent } from '../page-not-found/page-not-found.component';
@@ -18,12 +19,14 @@ import { httpInterceptorProviders } from '../http-interceptors/index';
 import { Datastore } from '../_services/datastore.service';
 import { AuthService } from '../_services/auth.service';
 import { PostService } from '../_services/post.service';
+import { UserService } from '../_services/user.service';
 
 @NgModule({
   //Only declare declarables: Components, Pipes and Directives
   declarations: [
     AppComponent,
     DashboardComponent,
+    FindFriendFormComponent,
     HomeComponent,
     LoginFormComponent,
     PageNotFoundComponent,
@@ -42,7 +45,8 @@ import { PostService } from '../_services/post.service';
     httpInterceptorProviders,
     Datastore,
     AuthService,
-    PostService
+    PostService,
+    UserService
   ],
   //Insert any component listed into the DOM
   bootstrap: [AppComponent]
