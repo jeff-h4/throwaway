@@ -5,10 +5,14 @@ class FriendshipService
     backward_friendship = Friendship.new(user_id: friend.id, friend_id: current_user.id)
 
     Friendship.transaction do
-      forward_friendship.save!
-      backward_friendship.save!
-      return true
+      begin
+        forward_friendship.save!
+        backward_friendship.save!
+      rescue ActiveRecord::Rollback, ActiveRecord::RecordNotUnique
+        return false
+      else
+        return forward_friendship
+      end
     end
-    return false
   end
 end

@@ -4,7 +4,7 @@ RSpec.describe UsersController, type: :controller do
 
   describe "GET #create" do
     let(:model_params) { { foo: "bar" } }
-    let(:params) { jsonapi_paramify(model_params) }
+    let(:params) { JsonApiParams.new(attribute_hash: model_params).params }
 
     subject { post :create, params: params }
 
