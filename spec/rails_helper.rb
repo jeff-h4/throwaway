@@ -82,3 +82,6 @@ RSpec.shared_examples "controller responds with correct status code" do |code|
   end
 end
 
+def jsonapi_paramify(attributeHash)
+  return { data: { attributes: attributeHash } }
+end

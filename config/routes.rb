@@ -6,5 +6,5 @@ Rails.application.routes.draw do
   post 'authenticate', to: "authentication#authenticate"
   resources :friendships, only: [:create]
   resources :posts, only: [:index]
-  resources :users, only: [:create]
+  resources :users, only: [:create, :index]
 end

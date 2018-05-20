@@ -3,24 +3,37 @@ import { Router }  from '@angular/router';
 import templateString from './login-form.component.html';
 
 import { User } from '../_models/user';
+import { Datastore } from '../_services/datastore.service';
 import { LoginFormService } from "./login-form.service";
 import { AuthService } from "../_services/auth.service";
 
 @Component({
   selector: 'app-login-form',
   template: templateString,
-  providers: [LoginFormService, AuthService]
+  providers: [
+    Datastore,
+    LoginFormService,
+    AuthService
+  ]
 })
 export class LoginFormComponent {
-  model = new User(-1, '', '',  'johndoe@mail.com', 'johndoe');
-  submitted = false;
-  loginFail = false;
+  model : User;
+  submitted : boolean;
+  loginFail : boolean;
 
   constructor(
     private router: Router,
+    private datastore: Datastore,
     private loginFormService: LoginFormService,
     private authService: AuthService
-  ) {}
+  ) {
+    this.model = this.datastore.createRecord(User, {
+      email: "johndoe@mail.com",
+      password: "johndoe"
+    });
+    this.submitted = false;
+    this.loginFail = false;
+  }
 
   onSubmit() {
     this.submitted = true;
@@ -42,6 +55,9 @@ export class LoginFormComponent {
   }
 
   resetForm() {
-    this.model = new User(-11, '','', '', '');
+    this.model = this.datastore.createRecord(User, {
+      email: "",
+      password: ""
+    });
   }
 }
