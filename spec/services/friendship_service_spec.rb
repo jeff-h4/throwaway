@@ -23,8 +23,11 @@ RSpec.describe FriendshipService, type: :service do
     end
 
     describe "when saving both forward and backward friendships succeeds" do
-      it "returns true" do
-        expect(subject).to be true
+
+      it "returns the forward friendship" do
+        result = subject
+        expect(result.user_id).to eq(user.id)
+        expect(result.friend_id).to eq(friend.id)
       end
 
       it "saves two friendships" do

@@ -12,18 +12,23 @@ RSpec.describe FriendshipsController, type: :controller do
     end
 
     describe "when request is authenticated", :logged_in do
-      let(:friendship_service) { instance_double("FriendshipService") }
+      let(:friendship_service) { class_double("FriendshipService") }
+      let!(:user) { create(:user) }
 
-      before { allow_any_instance_of(FriendshipsController).to receive(:friendship_service).and_return(friendship_service) }
+      before do
+        allow_any_instance_of(FriendshipsController).to receive(:friendship_service).and_return(friendship_service)
+        allow_any_instance_of(FriendshipsController).to receive(:current_user).and_return(user)
+      end
 
-      describe "when user matching email param is found" do
-        let(:friend_email) { "fredflintstone@gmail.com" }
-        let(:params) { { email: friend_email } } 
-        let!(:friend) { create(:user, email: friend_email)}
+      describe "when user matching friend_id is found" do
+        let!(:friend) { create(:user)}
+        let(:friend_params) { JsonApiParams.new({ id: friend.id, type_name: "friend" }) }
+        let(:friendship_params ) { JsonApiParams.new({ relationship_hash: { friend: friend_params.params } }) }
+        let(:params) { friendship_params.params }
+        let(:friendship) { create(:friendship, user: user, friend: friend) }
 
         describe "when saving friendship is successful" do
-          before { allow(friendship_service).to receive(:create_friendship).and_return(true) }
-
+          before { allow(friendship_service).to receive(:create_friendship).and_return(friendship) }
           include_examples "controller responds with correct status code", 201
         end
 
@@ -34,14 +39,11 @@ RSpec.describe FriendshipsController, type: :controller do
         end
       end
 
-      describe "when user matching email param is not found" do
-        let(:friend_email) { "does_not@exist.com" }
-        let(:params) { { email: friend_email } }
+      describe "when user matching friend_id param is not found" do
+        let(:friend_params) { JsonApiParams.new({ id: nil, type_name: "friend" }) }
+        let(:friendship_params ) { JsonApiParams.new({ relationship_hash: { friend: friend_params.params } }) }
+        let(:params) { friendship_params.params }
 
-        include_examples "controller responds with correct status code", 400
-      end
-
-      describe "when no email is provided" do
         include_examples "controller responds with correct status code", 400
       end
     end

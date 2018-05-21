@@ -14,11 +14,20 @@
     </div>
 
     <button type="submit" class="btn btn-success">Find</button>
-    <div *ngIf="showFriend">
-      {{ friend.first_name }} {{ friend.last_name }}
-    </div>
-    <div *ngIf="findFriendFail">
-      <p>No matching user found.</p>
-    </div>
   </form>
+  <div *ngIf="findFriendSuccess">
+    {{ friend.first_name }} {{ friend.last_name }}
+    <button
+      class="btn"
+      (click)="addFriend()"
+      *ngIf="!addFriendSuccess"
+      >
+      Add
+    </button>
+    <span *ngIf="addFriendSuccess">Friend added successfully.</span>
+    <span *ngIf="addFriendError">There was a problem adding your friend.</span>
+  </div>
+  <div *ngIf="findFriendFail">
+    <p>No matching user found.</p>
+  </div>
 </div>
