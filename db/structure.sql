@@ -32,7 +32,7 @@ CREATE TABLE `friendships` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `user_id` (`user_id`,`friend_id`),
   KEY `index_user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `posts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -44,6 +44,7 @@ CREATE TABLE `posts` (
   `updated_at` datetime NOT NULL,
   `actor_id` bigint(20) DEFAULT NULL,
   `owner_id` bigint(20) DEFAULT NULL,
+  `status` tinyint(4) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -67,7 +68,7 @@ CREATE TABLE `users` (
   `created_at` datetime NOT NULL,
   `updated_at` datetime NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -85,6 +86,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20180508163234'),
 ('20180508163244'),
 ('20180514213545'),
-('20180515000917');
+('20180515000917'),
+('20180522184830');
 
 
