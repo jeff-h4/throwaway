@@ -13,6 +13,13 @@ export class PostService {
     private datastore: Datastore
   ) {}
 
+  addPost(title) : Observable<Post> {
+    let post = this.datastore.createRecord(Post, {
+      title: title
+    })
+    return post.save();
+  }
+
   getPosts() : Observable<Post[]> {
     return this.datastore.findAll(Post, {})
       .pipe(

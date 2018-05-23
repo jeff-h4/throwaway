@@ -4,8 +4,9 @@
   <app-friends-list></app-friends-list>
 
   <h2>Requests</h2>
+  <app-create-post-form (createdPost)="onPostCreation($event)"></app-create-post-form>
   <div *ngIf="isLoading">
-    <p>Looks like nobody needs anything yet.</p>
+    <p>Checking for existing requests...</p>
   </div>
 
   <div *ngIf="!isLoading && !error">
@@ -16,6 +17,6 @@
     </ul>
   </div>
   <div *ngIf="error">
-    <p>ERROR: There was a problem retrieving the posts.</p>
+    <p>ERROR: There was a problem retrieving requests.</p>
   </div>
 </div>
