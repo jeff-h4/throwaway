@@ -27,7 +27,7 @@ class UsersController < ApplicationController
   private
 
   def user_post_params
-    params[:data][:attributes]  
+    params.dig(:data, :attributes)
   end
 
   def search_params
