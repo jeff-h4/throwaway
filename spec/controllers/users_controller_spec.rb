@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe UsersController, type: :controller do
-  describe 'GET #create' do
+  describe 'POST #create' do
     let(:model_params) { { foo: 'bar' } }
     let(:params) { JsonApiParams.new(attribute_hash: model_params).params }
 

@@ -8,6 +8,7 @@ import { JsonApiModule } from 'angular2-jsonapi';
 import { AppComponent } from './app.component';
 import { AppRoutingModule } from './app-routing.module';
 
+import { CreatePostFormComponent } from '../create-post-form/create-post-form.component';
 import { DashboardComponent } from '../dashboard/dashboard.component';
 import { FindFriendFormComponent } from '../find-friend-form/find-friend-form.component';
 import { FriendsListComponent } from '../friends-list/friends-list.component';
@@ -27,6 +28,7 @@ import { UserService } from '../_services/user.service';
   //Only declare declarables: Components, Pipes and Directives
   declarations: [
     AppComponent,
+    CreatePostFormComponent,
     DashboardComponent,
     FindFriendFormComponent,
     FriendsListComponent,
