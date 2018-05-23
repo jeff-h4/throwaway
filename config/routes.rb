@@ -5,6 +5,6 @@ Rails.application.routes.draw do
   get 'home/index'
   post 'authenticate', to: "authentication#authenticate"
   resources :friendships, only: [:create]
-  resources :posts, only: [:index]
+  resources :posts, only: [:create, :index]
   resources :users, only: [:create, :index]
 end
