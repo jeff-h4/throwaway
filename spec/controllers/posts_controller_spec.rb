@@ -40,4 +40,35 @@ RSpec.describe PostsController, type: :controller do
       include_examples 'controller responds with correct status code', 200
     end
   end
+
+  describe 'PUT #update' do
+    let!(:user) { create(:user) }
+    let!(:post) { create(:post, title: '100 eggs', owner: user) }
+    let!(:updated_post) { create(:post, title: '2 eggs', owner: user, status: :accepted) }
+    let(:params) { { id: post.id } }
+
+    subject { put :update, params: params }
+
+    describe 'when request is unauthenticated' do
+      include_examples 'controller rejects unauthenticated requests'
+    end
+
+    describe 'when request is authenticated', :logged_in do
+      let(:post_service) { instance_double('PostService') }
+
+      before do
+        allow(PostService).to receive(:new).and_return(post_service)
+      end
+
+      context 'when update is successful' do
+        before { allow(post_service).to receive(:update).and_return(updated_post) }
+        include_examples 'controller responds with correct status code', 200
+      end
+
+      context 'when update fails' do
+        before { allow(post_service).to receive(:update).and_return(nil) }
+        include_examples 'controller responds with correct status code', 400
+      end
+    end
+  end
 end

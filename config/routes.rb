@@ -3,8 +3,8 @@ Rails.application.routes.draw do
 
   root 'home#index'
   get 'home/index'
-  post 'authenticate', to: "authentication#authenticate"
+  post 'authenticate', to: 'authentication#authenticate'
   resources :friendships, only: [:create]
-  resources :posts, only: [:create, :index]
+  resources :posts, only: [:create, :index, :update]
   resources :users, only: [:create, :index]
 end

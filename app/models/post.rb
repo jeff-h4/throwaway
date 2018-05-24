@@ -8,6 +8,8 @@ class Post < ApplicationRecord
   validates :owner, presence: { message: 'must be assigned' }
   validates :status, presence: { message: 'must be assigned' }
 
+  VALID_STATUSES = %w[open accepted accomplished closed cancelled].freeze
+
   enum status: {
     open: 0,
     accepted: 1,
