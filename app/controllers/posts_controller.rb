@@ -18,9 +18,22 @@ class PostsController < ApplicationController
     render json: PostSerializer.new(posts.to_a).serialized_json
   end
 
+  def update
+    updated_post = post_service.update(params[:id])
+    if updated_post
+      render json: PostSerializer.new(updated_post).serialized_json, status: :ok
+    else
+      head :bad_request
+    end
+  end
+
   private
 
   def post_params
-    params.dig(:data,:attributes)
+    params.dig(:data, :attributes)
+  end
+
+  def post_service
+    @post_service ||= PostService.new(current_user, post_params)
   end
 end
