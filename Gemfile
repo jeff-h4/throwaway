@@ -33,6 +33,7 @@ gem 'jwt', '~> 2.1.0'
 gem 'bcrypt', '~> 3.1.7'
 gem 'rails-patterns'
 gem 'aasm', '~> 4.12.3'
+gem 'bootstrap', '~> 4.1.1'
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development

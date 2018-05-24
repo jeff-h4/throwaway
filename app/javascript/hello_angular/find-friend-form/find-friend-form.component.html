@@ -1,22 +1,35 @@
-<div class="container">
-  <h1>Find Friend</h1>
-  <form (ngSubmit)="onSubmit()" #findFriendForm="ngForm">
-    <div class="form-group">
-      <label for="email">Email</label>
-      <input
-        type="text"
-        class="form-control"
-        id="email"
-        required
-        [(ngModel)]="formInput.email"
-        name="email"
-        >
+<form (ngSubmit)="onSubmit()" #findFriendForm="ngForm">
+  <div class="row">
+    <div class="col-9">
+      <div class="row">
+        <div class="form-group">
+          <div class="col-3">
+            <label for="email">Email</label>
+          </div>
+          <div class="col-9">
+            <input
+              type="text"
+              class="form-control"
+              id="email"
+              required
+              [(ngModel)]="formInput.email"
+              name="email"
+              >
+          </div>
+        </div>
+      </div>
     </div>
+    <div class="col-3">
+      <button type="submit" class="btn btn-success">Find</button>
+    </div>
+  </div>
+</form>
 
-    <button type="submit" class="btn btn-success">Find</button>
-  </form>
-  <div *ngIf="findFriendSuccess">
-    {{ friend.first_name }} {{ friend.last_name }}
+<div class="row" *ngIf="findFriendSuccess">
+  <div class="col-9">
+    <span>{{ friend.first_name }} {{ friend.last_name }}</span>
+  </div>
+  <div class="col-3">
     <button
       class="btn"
       (click)="addFriend()"
@@ -24,10 +37,13 @@
       >
       Add
     </button>
-    <span *ngIf="addFriendSuccess">Friend added successfully.</span>
-    <span *ngIf="addFriendError">There was a problem adding your friend.</span>
   </div>
-  <div *ngIf="findFriendFail">
-    <p>No matching user found.</p>
-  </div>
+</div>
+<div class="row">
+  <span *ngIf="addFriendSuccess">Friend added successfully.</span>
+  <span *ngIf="addFriendError">There was a problem adding your friend.</span>
+</div>
+
+<div *ngIf="findFriendFail">
+  <p>No matching user found.</p>
 </div>
