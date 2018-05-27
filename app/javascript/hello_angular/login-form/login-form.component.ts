@@ -45,6 +45,7 @@ export class LoginFormComponent {
       .subscribe({
         next: resp => {
           this.authService.setAuthorizationToken(resp.auth_token);
+          this.authService.loginUser(resp.user);
           this.loginFail = false;
           this.router.navigate(['/dashboard']);
         },
