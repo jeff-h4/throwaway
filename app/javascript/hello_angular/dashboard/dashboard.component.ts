@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
     this.posts = [];
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
     this.getPosts();
   }
 

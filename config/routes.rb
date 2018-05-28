@@ -7,5 +7,5 @@ Rails.application.routes.draw do
   resources :friendships, only: [:create]
   resources :friends, only: [:index]
   resources :posts, only: [:create, :index, :update]
-  resources :users, only: [:create, :index]
+  resources :users, only: [:create, :index, :show]
 end

@@ -64,7 +64,8 @@ export class FindFriendFormComponent {
   }
 
   findFriend(): void {
-    this.userService.findUsers(this.formInput.email)
+    let filterParams = {email: this.formInput.email};
+    this.userService.findUsers(filterParams)
       .subscribe({
         next: users => {
           this.friend = users[0];

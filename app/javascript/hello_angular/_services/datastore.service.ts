@@ -12,6 +12,7 @@ const config: DatastoreConfig = {
   models: {
     friendships: Friendship,
     posts: Post,
+    user: User, //Using Rails fast_jsonapi gem in the backend, which seems to use a singular type convention
     users: User
   }
 }

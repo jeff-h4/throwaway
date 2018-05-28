@@ -13,12 +13,13 @@ export class UserService {
     private datastore: Datastore
   ) {}
 
-  findUsers(email) : Observable<User[]> {
-    return this.datastore.findAll(User, {
-      filter: {
-        email: email
-      }
-    })
+  getUser(id, fieldParams): Observable<User> {
+    return this.datastore.findRecord(User, id, fieldParams)
+  }
+
+  findUsers(filterParams): Observable<User[]> {
+    let params = {filter: filterParams};
+    return this.datastore.findAll(User, params)
       .pipe(
         map(queryData => queryData.getModels()),
       )

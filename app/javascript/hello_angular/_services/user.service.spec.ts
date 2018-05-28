@@ -29,8 +29,9 @@ describe("UserService", () => {
 
     it("should return an array of Users", () => {
       let expectedFilter = {filter: {email: testEmail}};
+      let params = {email: testEmail}
 
-      service.findUsers(testEmail).subscribe((users) => {
+      service.findUsers(params).subscribe((users) => {
         expect(datastore.findAll).toBeCalledWith(User, expectedFilter);
         expect(users).toBe(dummyUserArray);
       });
