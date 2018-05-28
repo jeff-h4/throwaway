@@ -13,6 +13,6 @@ export class User extends JsonApiModel {
   @Attribute()
   email: string;
 
-  @Attribute()
-  password: string;
+  @HasMany()
+  friends?: User;
 }
