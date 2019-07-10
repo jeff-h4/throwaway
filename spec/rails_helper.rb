@@ -3,11 +3,11 @@ require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
-abort("The Rails environment is running in production mode!") if Rails.env.production?
+abort('The Rails environment is running in production mode!') if Rails.env.production?
 require 'rspec/rails'
 require 'support/factory_bot'
 # Add additional requires below this line. Rails is not loaded until this point!
-
+require 'aasm/rspec'
 # Requires supporting ruby files with custom matchers and macros, etc, in
 # spec/support/ and its subdirectories. Files matching `spec/**/*_spec.rb` are
 # run as spec files by default. This means that files in spec/support that end
@@ -62,4 +62,36 @@ RSpec.configure do |config|
     allow_any_instance_of(UserAuthenticationService).to receive(:authenticate_request).and_return(true)
     allow_any_instance_of(UserAuthenticationService).to receive(:current_user).and_return(user)
   end 
+end
+
+RSpec.shared_examples "controller rejects unauthenticated requests" do
+  context "action" do
+    it "returns http status unauthorized" do
+      subject
+      expect(response).to have_http_status(:unauthorized)
+    end
+  end
+end
+
+RSpec.shared_examples "controller responds with correct status code" do |code|
+  context "action" do
+    it "returns the correct status code" do
+      subject
+      expect(response).to have_http_status(code)
+    end
+  end
+end
+
+class JsonApiParams
+  attr_accessor :params
+
+  def initialize(inputHash = {})
+    @params = {
+      data: {
+        attributes: inputHash[:attribute_hash],
+        id: inputHash[:id],
+        relationships: inputHash[:relationship_hash]
+      }
+    }
+  end
 end

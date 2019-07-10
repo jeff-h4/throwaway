@@ -33,7 +33,9 @@
   },
   "scripts": {
     "lint": "tslint -c config/tslint.json 'app/javascript/**/*.{ts,tsx}'",
-    "test": "jest"
+    "test": "jest",
+    "test:cov": "jest --coverage",
+    "jest-debug": "jest --debug"
   },
   "jest": {
     "globals": {
@@ -56,7 +58,12 @@
       "js"
     ],
     "transform": {
+      "\\.html$": "<rootDir>/htmlLoader.jest.js",
+      "\\.js$": "<rootDir>/node_modules/babel-jest",
       "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
-    }
+    },
+    "transformIgnorePatterns": [
+      "node_modules/(?!(lodash-es|my-project)/)"
+    ]
   }
 }

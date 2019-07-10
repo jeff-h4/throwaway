@@ -22,7 +22,11 @@ export class DashboardComponent implements OnInit {
     this.posts = [];
   }
 
-  ngOnInit() {
+  ngOnInit(): void {
+    this.getPosts();
+  }
+
+  getPosts() {
     this.postService.getPosts().subscribe({
       next: posts => {
         this.posts = posts;
@@ -34,5 +38,9 @@ export class DashboardComponent implements OnInit {
         this.error = true;
       }
     });
+  }
+
+  onPostCreation() {
+    this.getPosts();
   }
 }

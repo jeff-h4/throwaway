@@ -1,18 +1,29 @@
-<div class="dashboard">
-  <h1>Dashboard Page</h1>
-
+<div class="dashboard container">
+  <h2>Requests</h2>
+  <p>Create new request</p>
+  <app-create-post-form (createdPost)="onPostCreation($event)"></app-create-post-form>
   <div *ngIf="isLoading">
-    <p>Looks like nobody needs anything yet.</p>
+    <p>Checking for existing requests...</p>
   </div>
 
+  <br>
   <div *ngIf="!isLoading && !error">
-    <ul>
-      <li *ngFor="let post of posts">
-        {{ post.title }}
-      </li>
-    </ul>
+    <table class="table table-bordered">
+      <thead>
+        <tr>
+          <th>Title</th>
+          <th>Owner</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let post of posts">
+          <td>{{ post.title }}</td>
+          <td>Unspecified</td>
+        </tr>
+      </tbody>
+    </table>
   </div>
   <div *ngIf="error">
-    <p>ERROR: There was a problem retrieving the posts.</p>
+    <p>ERROR: There was a problem retrieving requests.</p>
   </div>
 </div>

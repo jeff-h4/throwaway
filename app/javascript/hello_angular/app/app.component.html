@@ -1,9 +1,19 @@
-<h1>This is the app.component.html file.</h1>
-<br>
-<h2>Angular Router</h2>
-<nav>
-  <a routerLink="/home" routerLinkActive="active">Home</a>
-  <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
-  <a routerLink="/pagenotfound" routerLinkActive="active">Page Not Found</a>
-</nav>
-<router-outlet></router-outlet>
+<div class="container">
+
+  <div class="row">
+    <p>Angular Router</p>
+    <nav>
+      <a routerLink="/home" routerLinkActive="active">Home</a>
+      <a routerLink="/dashboard" routerLinkActive="active">Dashboard</a>
+      <a routerLink="/pagenotfound" routerLinkActive="active">Page Not Found</a>
+    </nav>
+  </div>
+  <div class="row">
+    <div class="col-4">
+      <app-friends-list></app-friends-list>
+    </div>
+    <div class="col-8">
+      <router-outlet></router-outlet>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div class="container">
+  <h2>Find friend</h2>
+  <app-find-friend-form></app-find-friend-form>
+  <h2>Friends List</h2>
+  <div *ngIf="displayFriends">
+    <table class="table table-bordered">
+      <tbody>
+        <tr *ngFor="let friend of friends">
+          <td>{{ friend.first_name }} {{ friend.last_name }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <p *ngIf="getFriendsError">There was a problem fetching your friends.</p>
+</div>
